@@ -34,13 +34,21 @@ class Graph:
 		return self.__edges[:]
 	
 	def getEdgesConnectedToNode(self, node):
-		pass #NOT YET IMPLEMENTED
+		edges = []
+		for edge in self.__edges:
+			if node in edge[0:1]:
+				edges.append(edge[:]) #Append a copy of the edge to edges
+		return edges
 	
 	def getNodeDegrees(self, node):
-		pass #NOT YET IMPLEMENTED
+		return len(self.getEdgesConnectedToNode(node))
 	
-	def setEdgeWeight(self, node_a, node_b):
-		pass #NOT YET IMPLEMENTED
+	def setEdgeWeight(self, node_a, node_b, weight):
+		edgeIndex = self.checkEdge(node_a, node_b)
+		if(edgeIndex == -1):
+			raise(IndexError("Edge does not exist!"))
+		else:
+			self.__edges[edgeIndex][2] = weight
 	
 	def makeComplete(self):
 		numNodes = len(self.__nodes)
